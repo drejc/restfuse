@@ -1,0 +1,99 @@
+body {
+  background-image: url( "../images/background.png" );
+	background-color: #ffffff;
+	background-position: bottom;
+	height: 100%;
+	background-attachment: fixed;
+	background-repeat: repeat-x; 
+	font-family: 'Droid Sans', sans-serif;
+}
+
+div#logo {
+	position: absolute;
+	height: 42px;
+	width: 300px;
+	left: 15%;
+	top: 30px;
+}           
+
+div#content {
+	position: absolute;
+	left: 17%;
+	right: 17%;  
+	top: 100px;
+	height: auto;
+}                 
+
+div#description {   
+	font-size: 1.3em;
+	width: 100%;               
+}     
+
+div#description p {
+	margin: 0px;	              
+} 
+
+div#description a {
+	text-decoration: underline;  
+	color: #333333;  
+}    
+
+div#description a:hover {
+  text-decoration: none;	
+}
+
+div#code {   
+	font-size: 1.2em;
+	width: auto;
+}  
+
+div#menu {        
+	position: absolute;  
+	text-align: right;
+	right: -34%;  
+	left: -34%;
+	margin-top: 30px;    
+	width: 158%;      
+}      
+
+div#menu a {
+	font-size: 1.3em;
+	text-decoration: none;
+	color: #333333;  
+} 
+
+div#menu li:hover {
+	background-color: #c8c8c8;  
+}  
+
+div#menu img {
+	vertical-align: middle;
+}
+  
+div#menu ul {
+	padding: 0;
+	list-style:none; 
+}          
+
+div#menu li {
+	display: inline; 
+  list-style-type: none;	
+	padding: 10px 10px 8px 10px;
+	margin: 0px 10px 0px 0px; 
+	background-color: #e6e6e6;  
+	border-radius: 7px;
+	moz-border-radius: 7px;  
+}    
+
+div#footer {    
+	font-family: 'Dancing Script', cursive;
+	font-size: 1.5em;
+	color: #ffffff;
+	position: absolute;
+	bottom: 15px;
+	right: 15px;     
+}  
+
+div#footer img {
+	vertical-align: middle;
+}         
