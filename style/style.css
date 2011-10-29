@@ -3,6 +3,7 @@ body {
 	background-color: #ffffff;
 	background-position: bottom;
 	height: 100%;
+	text-align: center;
 	background-attachment: fixed;
 	background-repeat: repeat-x; 
 	font-family: 'Droid Sans', sans-serif;
@@ -12,33 +13,30 @@ div#logo {
 	position: absolute;
 	height: 42px;
 	width: 300px;
-	left: 15%;
-	top: 30px;
+	left: 160px;
+	top: 35px;
 }           
 
-div#content {
+div#content {     
+	text-align: left;
 	position: absolute;
-	left: 17%;
-	right: 17%;  
+	left: 190px; 
 	top: 100px;
-	height: auto;
-}                 
+	height: auto; 
+	width: 950px;  
+	font-size: 1.2em;  
+}                   
 
-div#description {   
-	font-size: 1.3em;
-	width: 100%;               
-}     
-
-div#description p {
+div#content p {
 	margin: 0px;	              
 } 
 
-div#description a {
+div#content a {
 	text-decoration: underline;  
 	color: #333333;  
 }    
 
-div#description a:hover {
+div#content a:hover {
   text-decoration: none;	
 }
 
@@ -48,16 +46,18 @@ div#code {
 }  
 
 div#menu {        
-	position: absolute;  
+	position: absolute; 
+	top: 0px;
+  left: 30px;
 	text-align: right;
-	right: -34%;  
-	left: -34%;
-	margin-top: 30px;    
-	width: 158%;      
+	margin-top: 0px;    
+	width: 90%;  
+	min-width: 1100px;  
 }      
 
 div#menu a {
-	font-size: 1.3em;
+	font-size: 1.0em;   
+	font-style: bold;
 	text-decoration: none;
 	color: #333333;  
 } 
@@ -72,17 +72,18 @@ div#menu img {
   
 div#menu ul {
 	padding: 0;
+	margin: 0;
 	list-style:none; 
 }          
 
 div#menu li {
 	display: inline; 
   list-style-type: none;	
-	padding: 10px 10px 8px 10px;
+	padding: 13px 10px 8px 10px;
 	margin: 0px 10px 0px 0px; 
 	background-color: #e6e6e6;  
-	border-radius: 7px;
-	moz-border-radius: 7px;  
+	border-radius: 0px 0px 7px 7px;
+	moz-border-radius: 0px 0px 7px 7px;  
 }    
 
 div#footer {    

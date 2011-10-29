@@ -1,45 +1,15 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset='utf-8'>
-  <title>restfuse - An open-source JUnit extension for automated HTTP Tests</title>
-  <link href='http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'> 
-  <link href='http://fonts.googleapis.com/css?family=Dancing+Script' rel='stylesheet' type='text/css'>   
-  <script type="text/javascript" src="js/shCore.js"></script> 
-  <script type="text/javascript" src="js/shBrushJava.js"></script> 
-  <link href="style/shCore.css" rel="stylesheet" type="text/css" />
-  <link href="style/shThemeEclipse.css" rel="stylesheet" type="text/css" />
-  <link rel="stylesheet" type="text/css" href="style/style.css"> 
-</head>
+---
+layout: default
+title: restfuse - An open-source JUnit extension for automated HTTP/REST Tests
+---
 
-<body>
-	
-  	<!-- twitter follow badge by go2web20 -->
-	<script src='js/badge.js' type='text/javascript'></script><script type='text/javascript' charset='utf-8'><!--
-	tfb.account = 'eclipsesource';
-	tfb.label = 'follow-us';
-	tfb.color = '#9cb3d1';
-	tfb.side = 'r';
-	tfb.top = 80;
-	tfb.showbadge();
-	--></script>
-	<!-- end of twitter follow badge -->       
-	
-  <div id="logo"><a href="http://restfuse.com"><img src="images/logo.png" alt="restfust"/></a></div>  
+<p>
+An open-source <a href="http://junit.org">JUnit</a> extension for automated HTTP/REST Tests. Everything you need to know to get started is displayed in the snippet below which is a fully functional HTTP Test.
+By the way, restfuse also supports the <a href="#">testing of asynchronous REST services</a>.
+</p>
 
-  <div id="footer">brought to you by <a href="http://eclipsesource.com"><img src="images/es-logo.png" alt="EclipseSource"/></a></div>
-    
-  <div id="content"> 
-	
-	<div id="description">
-	  <p>
-	  An open-source <a href="http://junit.org">JUnit</a> extension for automated HTTP/REST Tests. Everything you need to know to get started is displayed in the snippet below which is a fully functional HTTP Test.
-	  By the way, restfuse also supports the <a href="#">testing of asynchronous REST services</a>.
-	  </p>
-	</div>
-	
-	<div id="code">  
-	  <pre class="brush: java">
+<pre>
+{% highlight java %}		 
 @RunWith( HttpJUnitRunner.class )
 public class RestfuseTest {
 
@@ -48,35 +18,14 @@ public class RestfuseTest {
 
   @Context
   private Response response;
-		
+
   @HttpTest( method = Method.GET, path = "/" )
   public void checkRestfuseOnlineStatus() {
     assertOk( response );
   }  
 }  
-	  </pre>  
-	</div>
+{% endhighlight %}  
+</pre>
+
 	
-	<div id="menu">  
-	  <ul>
-	    <li><a href="#"><img src="images/icon-download.png"/> Download Version 1.0.0</a></li>  
-    	<li><a href="#"><img src="images/icon-doc.png"/> Documentation</a></li> 
-    	<li><a href="https://github.com/eclipsesource/restfuse/wiki"><img src="images/icon-wiki.png"/> Wiki</a></li> 
-	    <li><a href="#"><img src="images/icon-maven.png"/> Maven</a></li>   
-	    <li><a href="#"><img src="images/icon-eclipse.png"/> p2</a></li>  
-	    <li><a href="https://github.com/eclipsesource/restfuse"><img src="images/icon-github.png"/> Sources</a></li>  	
-	  </ul>  	
-	</div>		
 	
-  </div>  
-           
-  <script type="text/javascript">  
-	SyntaxHighlighter.defaults[ 'tab-size' ] = 2;
-	SyntaxHighlighter.defaults[ 'toolbar' ] = false;
-	SyntaxHighlighter.defaults[ 'gutter' ] = false;
-	SyntaxHighlighter.defaults[ 'auto-links' ] = false;		
-    SyntaxHighlighter.all()
-  </script>
-  
-</body>
-</html>
