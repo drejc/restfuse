@@ -1,12 +1,12 @@
 body {
-  background-image: url( "../images/background.png" );
+  background-image: url( "/images/background.png" );
 	background-color: #ffffff;
 	background-position: bottom;
 	height: 100%;
 	text-align: center;
 	background-attachment: fixed;
 	background-repeat: repeat-x; 
-	font-family: 'Droid Sans', sans-serif;
+	font-family: 'Droid Sans', sans-serif;  
 }
 
 div#logo {
