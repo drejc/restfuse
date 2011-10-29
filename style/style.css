@@ -21,7 +21,7 @@ div#content {
 	text-align: left;
 	position: absolute;
 	left: 190px; 
-	top: 100px;
+	top: 105px;
 	height: auto; 
 	width: 950px;  
 	font-size: 1.2em;  
@@ -34,7 +34,15 @@ div#content p {
 div#content a {
 	text-decoration: underline;  
 	color: #333333;  
-}    
+}   
+
+div#content code {
+	font-size: 1.1em;	
+} 
+
+div#content pre {
+	margin-top: 5px;
+}
 
 div#content a:hover {
   text-decoration: none;	
