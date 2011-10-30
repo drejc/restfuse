@@ -1,4 +1,8 @@
-body {
+* {
+  margin: 0;
+}  
+
+html, body {
   background-image: url( "/images/background.png" );
 	background-color: #ffffff;
 	background-position: bottom;
@@ -6,7 +10,7 @@ body {
 	text-align: center;
 	background-attachment: fixed;
 	background-repeat: repeat-x; 
-	font-family: 'Droid Sans', sans-serif;  
+	font-family: 'Droid Sans', sans-serif;
 }
 
 div#logo {
@@ -28,7 +32,7 @@ div#content {
 }                   
 
 div#content p {
-	margin: 0px;	              
+	margin: 0px 0px 10px 0px;	              
 } 
 
 div#content a {
@@ -98,9 +102,9 @@ div#footer {
 	font-family: 'Dancing Script', cursive;
 	font-size: 1.5em;
 	color: #ffffff;
-	position: absolute;
-	bottom: 15px;
-	right: 15px;     
+  position: fixed;
+  bottom: 15px;
+  right: 15px;   
 }  
 
 div#footer img {
