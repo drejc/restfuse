@@ -21,7 +21,9 @@ public class RestfuseTest {
     assertOk( response );
   }  
 }  
-{% endhighlight %}  
+{% endhighlight %} 
+</p>
+<p>
 This test sends a request to restfuse.com before the test method will be executed. After the request returns the response will be injected by assigning the <code>@Context</code> annotated <code>response</code> field before the test method will be executed. This field can be used within the test method to test the content of the response. 
 </p>	
 </pre>
