@@ -36,8 +36,8 @@ public class RestfusePollTest {
 </p>
 <p>
 To use a callback to test an asynchronous service you can use the <code>@Callback</code> annotation
-on you test method. Restfuse will start a server on the defined port and fails if the attached 
-resource was not called. With the resource you can test the incoming request. A simple callback 
+on you test method. Restfuse will start a server on the defined port and registers a resource. The test fails if the attached 
+resource was not called. Within the resource you can test the incoming request. A simple callback 
 example looks like this.
 {% highlight java %}     
 @RunWith( HttpJUnitRunner.class )
