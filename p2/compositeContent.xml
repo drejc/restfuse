@@ -2,7 +2,7 @@
 <?compositeMetadataRepository version='1.0.0'?>
 <repository name='Restfuse p2 repository' type='org.eclipse.equinox.internal.p2.metadata.repository.CompositeMetadataRepository' version='1.0.0'>
   <properties size='1'>
-    <property name='p2.timestamp' value='1320003304166'/>
+    <property name='p2.timestamp' value='1320315237429'/>
   </properties>
   <children size='1'>
     <child location='1.0.0'/>
