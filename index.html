@@ -14,7 +14,7 @@ public class RestfuseTest {
   public Destination destination = new Destination( "http://restfuse.com" ); 
 
   @Context
-  private Response response;
+  private Response response; // will be injected after every request
 
   @HttpTest( method = Method.GET, path = "/" )
   public void checkRestfuseOnlineStatus() {
