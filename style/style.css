@@ -109,4 +109,12 @@ div#footer {
 
 div#footer img {
 	vertical-align: middle;
-}         
+} 
+
+.gist .gist-file .gist-meta {
+  font-size: 60% !important;
+}    
+
+.gist .gist-file .gist-data {
+  font-size: 80% !important;
+}    

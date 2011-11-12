@@ -11,58 +11,12 @@ When you need to poll an asynchronous service more than once you can use the <co
 annotation. A simple example looks like the one below. The service in this example will be called 
 5 times as the same as the test method. The response for each request will be injected into the 
 test object and can be tested.
-{% highlight java %}     
-@RunWith( HttpJUnitRunner.class )
-public class RestfusePollTest {
-
-  @Rule
-  public Destination destination = new Destination( "http://restfuse.com" ); 
-
-  @Context
-  private Response response;
-  
-  @Context
-  private PollState pollState
-
-  @HttpTest( method = Method.GET, path = "/asynchron" )
-  @Poll( times = 5, interval = 500 )
-  public void testAsynchronousService() {
-    Response currentResponse = pollState.getRespone( pollState.getTimes() );
-    
-    assertEquals( currentResponse, response );
-  }  
-}  
-{% endhighlight %} 
+{% gist 1360418 %} 
 </p>
 <p>
 To use a callback to test an asynchronous service you can use the <code>@Callback</code> annotation
-on you test method. Restfuse will start a server on the defined port and registers a resource. The test fails if the attached 
-resource was not called. Within the resource you can test the incoming request. A simple callback 
-example looks like this.
-{% highlight java %}     
-@RunWith( HttpJUnitRunner.class )
-public class RestfuseCalbackTest {
- 
-  @Rule
-  public Destination destination = new Destination( "http://restfuse.com" );
-    
-  @Context
-  private Response response;
-   
-  private class TestCallbackResource extends DefaultCallbackResource {
-
-    @Override
-    public Response post( Request request ) {
-      assertNotNull( request.getBody() );
-      return super.post( request );
-    }
-  }
-   
-  @HttpTest( method = Method.GET, path = "/test" )
-  @Callback( port = 9090, path = "/asynchron", resource = TestCallbackResource.class, timeout = 10000 )
-  public void testMethod() {
-    assertAccepted( response );
-  }
-} 
-{% endhighlight %} 
+on you test method. Restfuse will start a server on the defined port and registers a resource. The 
+test fails if the attached resource was not called. Within the resource you can test the incoming 
+request. A simple callback example looks like this.
+{% gist 1360419 %} 
 </p>

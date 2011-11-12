@@ -1,4 +1,4 @@
 bin
 _site
-_cache
+_gist_cache
 .DS_Store
