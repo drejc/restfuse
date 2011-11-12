@@ -18,17 +18,18 @@ div#logo {
 	height: 42px;
 	width: 300px;
 	left: 160px;
-	top: 35px;
+	top: 55px;
 }           
 
 div#content {     
 	text-align: left;
 	position: absolute;
 	left: 190px; 
-	top: 105px;
+	top: 115px;
 	height: auto; 
 	width: 950px;  
-	font-size: 1.2em;  
+	font-size: 1.2em; 
+	padding-bottom: 40px; 
 }                   
 
 div#content p {
@@ -51,6 +52,17 @@ div#content pre {
 div#content a:hover {
   text-decoration: none;	
 }
+
+div#content h2 {
+  font-size: 1.1em;
+  margin-top: 10px;            
+} 
+
+div#content h3 {
+  font-size: 0.7em;  
+  font-style: italic;
+  margin-bottom: 10px;             
+} 
 
 div#code {   
 	font-size: 1.2em;
@@ -96,7 +108,32 @@ div#menu li {
 	background-color: #e6e6e6;  
 	border-radius: 0px 0px 7px 7px;
 	moz-border-radius: 0px 0px 7px 7px;  
-}    
+}  
+
+div#news {        
+  position: absolute; 
+  top: 38px;
+  left: 20px;
+  text-align: right;
+  color: #666666;
+  margin-top: 0px;    
+  width: 90%;  
+  min-width: 800px;  
+}  
+
+div#news a {        
+  color: #666666;
+  text-decoration: undeline:
+}
+  
+div#news a:hover {        
+  color: #666666;
+  text-decoration: none;
+}  
+
+div#news img {
+  vertical-align: middle;
+}
 
 div#footer {    
 	font-family: 'Dancing Script', cursive;

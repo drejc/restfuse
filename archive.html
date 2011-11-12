@@ -1,0 +1,12 @@
+---
+layout: default
+title: Restfuse News Archive
+---
+<p>
+Below, all previous news items are listed for archiving purpose. Maybe you will find something interesting ;)
+  <ul>
+    {% for post in site.posts %} 
+      <li><a href="{{ post.url }}" title="{{ post.title }}">{{ post.date | date:"%Y-%m-%d" }}: {{ post.title }}</a></li>
+    {% endfor %}
+  </ul> 
+</p>
