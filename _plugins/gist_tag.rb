@@ -9,7 +9,7 @@ module Jekyll
       super
       @text           = text
       @cache_disabled = false
-      @cache_folder   = File.expand_path "../_gist_cache", File.dirname(__FILE__)
+      @cache_folder   = File.expand_path "../../_gist_cache", File.dirname(__FILE__)
       FileUtils.mkdir_p @cache_folder
     end
 
