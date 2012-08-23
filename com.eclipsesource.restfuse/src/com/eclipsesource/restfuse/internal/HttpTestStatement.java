@@ -17,6 +17,7 @@ import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.Statement;
 
 import com.eclipsesource.restfuse.Method;
+import com.eclipsesource.restfuse.RequestContext;
 import com.eclipsesource.restfuse.Response;
 import com.eclipsesource.restfuse.annotation.Callback;
 import com.eclipsesource.restfuse.annotation.Context;
@@ -38,13 +39,15 @@ public class HttpTestStatement extends Statement {
   private final String baseUrl;
   private final String proxyHost;
   private final int proxyPort;
+  private final RequestContext context;
   
   public HttpTestStatement( Statement base, 
                             FrameworkMethod method, 
                             Object target, 
                             String baseUrl, 
                             String proxyHost, 
-                            int proxyPort ) 
+                            int proxyPort,
+                            RequestContext context) 
   {
     this.base = base;
     this.method = method;
@@ -52,6 +55,8 @@ public class HttpTestStatement extends Statement {
     this.baseUrl = baseUrl;
     this.proxyHost = proxyHost;
     this.proxyPort = proxyPort;
+    
+    this.context = context;
   }
 
   @Override
@@ -105,7 +110,7 @@ public class HttpTestStatement extends Statement {
 
   private InternalRequest buildRequest() {
     RequestConfiguration requestConfiguration = new RequestConfiguration( baseUrl, method, target );
-    return requestConfiguration.createRequest();
+    return requestConfiguration.createRequest(context);
   }
 
   private ClientResponse callService( InternalRequest request ) {

@@ -1,13 +1,10 @@
 /*******************************************************************************
- * Copyright (c) 2011 EclipseSource and others.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
+ * Copyright (c) 2011 EclipseSource and others. All rights reserved. This program and the
+ * accompanying materials are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *
- * Contributors:
- *    Holger Staudacher - initial API and implementation
- ******************************************************************************/ 
+ * http://www.eclipse.org/legal/epl-v10.html Contributors: Holger Staudacher - initial API and
+ * implementation
+ ******************************************************************************/
 package com.eclipsesource.restfuse.internal;
 
 import java.io.ByteArrayInputStream;
@@ -19,15 +16,14 @@ import org.junit.runners.model.FrameworkMethod;
 
 import com.eclipsesource.restfuse.AuthenticationType;
 import com.eclipsesource.restfuse.MediaType;
+import com.eclipsesource.restfuse.RequestContext;
 import com.eclipsesource.restfuse.annotation.Authentication;
 import com.eclipsesource.restfuse.annotation.Header;
 import com.eclipsesource.restfuse.annotation.HttpTest;
 
-
 public class RequestConfiguration {
-  
-  private static final String PATH_SEPARATOR = "/";
 
+  private static final String PATH_SEPARATOR = "/";
   private final String baseUrl;
   private final FrameworkMethod method;
   private final Object target;
@@ -38,16 +34,16 @@ public class RequestConfiguration {
     this.target = target;
   }
 
-  public InternalRequest createRequest() {
+  public InternalRequest createRequest( RequestContext context ) {
     HttpTest call = method.getAnnotation( HttpTest.class );
     InternalRequest request = new InternalRequest( combineUrlAndPath( baseUrl, call.path() ) );
     addAuthentication( call, request );
     addContentType( call, request );
-    addHeader( call, request );
+    addHeader( call, request, context );
     addBody( call, request );
     return request;
   }
-  
+
   private void addAuthentication( HttpTest call, InternalRequest request ) {
     Authentication[] authentications = call.authentications();
     if( authentications != null ) {
@@ -67,7 +63,15 @@ public class RequestConfiguration {
     }
   }
 
-  private void addHeader( HttpTest call, InternalRequest request ) {
+  private void addHeader( HttpTest call, InternalRequest request, RequestContext context ) {
+    
+    // add headers from context if available
+    if( context.headers.size() > 0 ) {
+      for( String name : context.headers.keySet() )
+        request.addHeader( name, context.headers.get( name ) );
+    }
+    
+    // add headers from annotations
     Header[] header = call.headers();
     if( header != null ) {
       for( Header parameter : header ) {
@@ -81,7 +85,7 @@ public class RequestConfiguration {
       request.setContent( getFileStream( test.file() ) );
     } else if( !test.content().equals( "" ) ) {
       request.setContent( getContentStream( test.content() ) );
-    } 
+    }
   }
 
   private InputStream getFileStream( String file ) {
@@ -89,8 +93,8 @@ public class RequestConfiguration {
     try {
       return resource.openStream();
     } catch( Exception ioe ) {
-      throw new IllegalStateException( "Could not open file " 
-                                       + file 
+      throw new IllegalStateException( "Could not open file "
+                                       + file
                                        + ". Maybe it's not on the classpath?" );
     }
   }
@@ -107,16 +111,16 @@ public class RequestConfiguration {
     String result;
     if( url.endsWith( PATH_SEPARATOR ) && pathValue.startsWith( PATH_SEPARATOR ) ) {
       result = url + pathValue.substring( 1, pathValue.length() );
-    } else if(    ( !url.endsWith( PATH_SEPARATOR ) && pathValue.startsWith( PATH_SEPARATOR ) ) 
-               || ( url.endsWith( PATH_SEPARATOR ) && !pathValue.startsWith( PATH_SEPARATOR ) ) ) 
+    } else if( ( !url.endsWith( PATH_SEPARATOR ) && pathValue.startsWith( PATH_SEPARATOR ) )
+               || ( url.endsWith( PATH_SEPARATOR ) && !pathValue.startsWith( PATH_SEPARATOR ) ) )
     {
       result = url + pathValue;
     } else if( !url.endsWith( PATH_SEPARATOR ) && !pathValue.startsWith( PATH_SEPARATOR ) ) {
       result = url + PATH_SEPARATOR + pathValue;
     } else {
-      throw new IllegalStateException( "Invalid url format with base url " 
+      throw new IllegalStateException( "Invalid url format with base url "
                                        + url
-                                       + " and path " 
+                                       + " and path "
                                        + pathValue );
     }
     return result;
