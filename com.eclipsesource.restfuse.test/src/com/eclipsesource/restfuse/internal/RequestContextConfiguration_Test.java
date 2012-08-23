@@ -43,7 +43,7 @@ import com.eclipsesource.restfuse.internal.callback.CallbackSerlvet;
 import com.eclipsesource.restfuse.internal.callback.CallbackStatement;
 
 
-public class RequestConfiguration_Test {
+public class RequestContextConfiguration_Test {
   
 
 private static final int TIMEOUT = 10;
@@ -54,7 +54,7 @@ private static final int TIMEOUT = 10;
   
   @BeforeClass
   public static void setUp() throws Exception {
-    server = new Server( 10043 );
+    server = new Server( 10045 );
     Context context = new Context( server, "/", Context.SESSIONS );
     CallbackStatement statement = mock( CallbackStatement.class );
     
@@ -91,12 +91,17 @@ private static final int TIMEOUT = 10;
   }
   
   @Rule
-  public Destination destination = new Destination( "http://localhost:10043/test" );  
+  public Destination destination = getDestination();  
     
+  private Destination getDestination() {
+	  Destination destination = new Destination( "http://localhost:10045/test" );
+	  destination.getRequestContext().headers.put("test", "value");
+	  return destination;
+  }
+  
   @Test
   @HttpTest( 
-    method = Method.POST, 
-    headers = { @Header( name = "test", value = "value" ) }, 
+    method = Method.POST,
     path = "/",
     authentications = { @Authentication( type = AuthenticationType.BASIC, user = "test", password = "pass" ) },
     type = MediaType.TEXT_PLAIN,
@@ -108,5 +113,6 @@ private static final int TIMEOUT = 10;
       assertTrue( headers.containsKey( "Authorization" ) );
       assertEquals( "value", headers.get( "test" ).get( 0 ) );
       assertEquals( MediaType.TEXT_PLAIN, resource.request.getType() );
-  }  
+  }
+
 }

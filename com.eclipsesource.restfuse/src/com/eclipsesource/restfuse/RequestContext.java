@@ -13,6 +13,8 @@ public class RequestContext {
    */
   public HashMap<String, String> headers;
   
+  public Object body;
+  
   public RequestContext()
   {
     headers = new HashMap<String, String>();
