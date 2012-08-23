@@ -17,14 +17,10 @@ import static org.mockito.Mockito.mock;
 import java.util.List;
 import java.util.Map;
 
-import junit.framework.TestResult;
-
 import org.junit.AfterClass;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.TestName;
 import org.mortbay.jetty.Server;
 import org.mortbay.jetty.servlet.Context;
 import org.mortbay.jetty.servlet.ServletHolder;
