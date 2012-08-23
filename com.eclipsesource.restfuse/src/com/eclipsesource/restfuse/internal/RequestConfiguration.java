@@ -66,7 +66,7 @@ public class RequestConfiguration {
   private void addHeader( HttpTest call, InternalRequest request, RequestContext context ) {
     
     // add headers from context if available
-    if( context.headers.size() > 0 ) {
+    if(context != null && context.headers.size() > 0 ) {
       for( String name : context.headers.keySet() )
         request.addHeader( name, context.headers.get( name ) );
     }

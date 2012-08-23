@@ -95,7 +95,7 @@ public class HttpTestStatement_Test {
     when( method.getAnnotation( HttpTest.class ) ).thenReturn( annotation );
     Object target = new Object();
     HttpTestStatement statement 
-      = new HttpTestStatement( base, method, target, "http://localhost", "http://proxy.com", 8080 );
+      = new HttpTestStatement( base, method, target, "http://localhost", "http://proxy.com", 8080, null );
     
     statement.evaluate();
     
@@ -103,6 +103,14 @@ public class HttpTestStatement_Test {
     assertNull( System.getProperty( HttpTestStatement.HTTP_PROXY_PORT ) );
   }
 
+  
+//  @Test
+//  @HttpTest( method = Method.GET, path = "/", headers = { @Header(name="Cookie", value="test=value")} )
+//  public void testRequestContextHeaders() {
+//	  	  
+//	  assertEquals(1, response.getHeaders().size());
+//  }
+  
   private HttpTest createAnnotation() {
     HttpTest annotation = new HttpTest() {
       
