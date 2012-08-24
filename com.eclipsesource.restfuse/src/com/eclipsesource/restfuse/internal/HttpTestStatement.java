@@ -54,8 +54,7 @@ public class HttpTestStatement extends Statement {
     this.target = target;
     this.baseUrl = baseUrl;
     this.proxyHost = proxyHost;
-    this.proxyPort = proxyPort;
-    
+    this.proxyPort = proxyPort;    
     this.context = context;
   }
 
