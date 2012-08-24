@@ -33,6 +33,7 @@ import com.eclipsesource.restfuse.Method;
 import com.eclipsesource.restfuse.Request;
 import com.eclipsesource.restfuse.Response;
 import com.eclipsesource.restfuse.annotation.Authentication;
+import com.eclipsesource.restfuse.annotation.Header;
 import com.eclipsesource.restfuse.annotation.HttpTest;
 import com.eclipsesource.restfuse.internal.callback.CallbackSerlvet;
 import com.eclipsesource.restfuse.internal.callback.CallbackStatement;
@@ -80,7 +81,7 @@ private static final int TIMEOUT = 10;
 	@Override
 	public Response post( Request request ) {
   	  // store request to be used in test case
-	  this.request = request;
+	  this.request = request;	  
       return super.post( request );
     }    
   }
@@ -107,6 +108,25 @@ private static final int TIMEOUT = 10;
       Map<String, List<String>> headers = resource.request.getHeaders();
       assertTrue( headers.containsKey( "Authorization" ) );
       assertEquals( "value", headers.get( "test" ).get( 0 ) );
+      assertEquals( MediaType.TEXT_PLAIN, resource.request.getType() );
+  }
+  
+  @Test
+  @HttpTest( 
+    method = Method.POST,
+    path = "/",
+    authentications = { @Authentication( type = AuthenticationType.BASIC, user = "test", password = "pass" ) },
+    type = MediaType.TEXT_PLAIN,
+    content = "test",
+    headers = { @Header( name = "test", value = "new-value" ) }
+  )
+  public void overrideHeaderTestMethod() {	
+      assertEquals( "test", resource.request.getBody() );
+      Map<String, List<String>> headers = resource.request.getHeaders();
+      assertTrue( headers.containsKey( "Authorization" ) );
+      
+      assertEquals( "value", headers.get( "new-value" ).get( 0 ) );
+      
       assertEquals( MediaType.TEXT_PLAIN, resource.request.getType() );
   }
 
