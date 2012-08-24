@@ -125,8 +125,8 @@ private static final int TIMEOUT = 10;
       Map<String, List<String>> headers = resource.request.getHeaders();
       assertTrue( headers.containsKey( "Authorization" ) );
       
-      assertEquals( "value", headers.get( "new-value" ).get( 0 ) );
-      
+      assertEquals( "value,new-value", headers.get( "test" ).get( 0 ) );
+            
       assertEquals( MediaType.TEXT_PLAIN, resource.request.getType() );
   }
 
