@@ -12,8 +12,8 @@ public class RequestContext {
    * Name value collection of headers
    */
   public HashMap<String, String> headers;
-  
-  public Object body;
+
+  // TODO: Add additional properties to be used at test runtime
   
   public RequestContext()
   {
