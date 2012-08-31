@@ -109,7 +109,7 @@ public class HttpTestStatement extends Statement {
 
   private InternalRequest buildRequest() {
     RequestConfiguration requestConfiguration = new RequestConfiguration( baseUrl, method, target );
-    return requestConfiguration.createRequest(context);
+    return requestConfiguration.createRequest( context );
   }
 
   private ClientResponse callService( InternalRequest request ) {

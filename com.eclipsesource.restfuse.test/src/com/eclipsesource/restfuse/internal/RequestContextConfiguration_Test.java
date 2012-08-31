@@ -1,13 +1,10 @@
 /*******************************************************************************
- * Copyright (c) 2011 EclipseSource and others.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *
- * Contributors:
- *    Holger Staudacher - initial API and implementation
- ******************************************************************************/ 
+ * Copyright (c) 2011 EclipseSource and others. All rights reserved. This
+ * program and the accompanying materials are made available under the terms of
+ * the Eclipse Public License v1.0 which accompanies this distribution, and is
+ * available at http://www.eclipse.org/legal/epl-v10.html Contributors: Holger
+ * Staudacher - initial API and implementation
+ ******************************************************************************/
 package com.eclipsesource.restfuse.internal;
 
 import static org.junit.Assert.assertEquals;
@@ -17,13 +14,13 @@ import static org.mockito.Mockito.mock;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.servlet.ServletContextHandler;
+import org.eclipse.jetty.servlet.ServletHolder;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
-import org.mortbay.jetty.Server;
-import org.mortbay.jetty.servlet.Context;
-import org.mortbay.jetty.servlet.ServletHolder;
 
 import com.eclipsesource.restfuse.AuthenticationType;
 import com.eclipsesource.restfuse.DefaultCallbackResource;
@@ -38,22 +35,17 @@ import com.eclipsesource.restfuse.annotation.HttpTest;
 import com.eclipsesource.restfuse.internal.callback.CallbackSerlvet;
 import com.eclipsesource.restfuse.internal.callback.CallbackStatement;
 
-
 public class RequestContextConfiguration_Test {
-  
 
-private static final int TIMEOUT = 10;
-
+  private static final int TIMEOUT = 10;
   private static Server server;
-  
   private static TestResource resource = new TestResource();
-  
+
   @BeforeClass
   public static void setUp() throws Exception {
     server = new Server( 10045 );
-    Context context = new Context( server, "/", Context.SESSIONS );
+    ServletContextHandler context = new ServletContextHandler( server, "/", ServletContextHandler.SESSIONS );
     CallbackStatement statement = mock( CallbackStatement.class );
-    
     CallbackSerlvet servlet = new CallbackSerlvet( resource, statement );
     context.addServlet( new ServletHolder( servlet ), "/" );
     server.start();
@@ -63,7 +55,7 @@ private static final int TIMEOUT = 10;
       timer++;
     }
   }
-  
+
   @AfterClass
   public static void tearDown() throws Exception {
     server.stop();
@@ -73,61 +65,50 @@ private static final int TIMEOUT = 10;
       timer++;
     }
   }
-  
   private static class TestResource extends DefaultCallbackResource {
-    
-	public Request request;
-	  
-	@Override
-	public Response post( Request request ) {
-  	  // store request to be used in test case
-	  this.request = request;	  
+
+    public Request request;
+
+    @Override
+    public Response post( Request request ) {
+      // store request to be used in test case
+      this.request = request;
       return super.post( request );
-    }    
+    }
   }
   
   @Rule
-  public Destination destination = getDestination();  
-    
+  public Destination destination = getDestination();
+
   private Destination getDestination() {
-	  Destination destination = new Destination( "http://localhost:10045/test" );
-	  destination.getRequestContext().headers.put("test", "value");
-	  return destination;
-  }
-  
-  @Test
-  @HttpTest( 
-    method = Method.POST,
-    path = "/",
-    authentications = { @Authentication( type = AuthenticationType.BASIC, user = "test", password = "pass" ) },
-    type = MediaType.TEXT_PLAIN,
-    content = "test"
-  )
-  public void fakeTestMethod() {	
-      assertEquals( "test", resource.request.getBody() );
-      Map<String, List<String>> headers = resource.request.getHeaders();
-      assertTrue( headers.containsKey( "Authorization" ) );
-      assertEquals( "value", headers.get( "test" ).get( 0 ) );
-      assertEquals( MediaType.TEXT_PLAIN, resource.request.getType() );
-  }
-  
-  @Test
-  @HttpTest( 
-    method = Method.POST,
-    path = "/",
-    authentications = { @Authentication( type = AuthenticationType.BASIC, user = "test", password = "pass" ) },
-    type = MediaType.TEXT_PLAIN,
-    content = "test",
-    headers = { @Header( name = "test", value = "new-value" ) }
-  )
-  public void overrideHeaderTestMethod() {	
-      assertEquals( "test", resource.request.getBody() );
-      Map<String, List<String>> headers = resource.request.getHeaders();
-      assertTrue( headers.containsKey( "Authorization" ) );
-      
-      assertEquals( "value,new-value", headers.get( "test" ).get( 0 ) );
-            
-      assertEquals( MediaType.TEXT_PLAIN, resource.request.getType() );
+    Destination destination = new Destination( "http://localhost:10045/test" );
+    destination.getRequestContext().headers.put( "test", "value" );
+    return destination;
   }
 
+  @Test
+  @HttpTest(method = Method.POST, path = "/", authentications = {
+    @Authentication(type = AuthenticationType.BASIC, user = "test", password = "pass")
+  }, type = MediaType.TEXT_PLAIN, content = "test")
+  public void fakeTestMethod() {
+    assertEquals( "test", resource.request.getBody() );
+    Map<String, List<String>> headers = resource.request.getHeaders();
+    assertTrue( headers.containsKey( "Authorization" ) );
+    assertEquals( "value", headers.get( "test" ).get( 0 ) );
+    assertEquals( MediaType.TEXT_PLAIN, resource.request.getType() );
+  }
+
+  @Test
+  @HttpTest(method = Method.POST, path = "/", authentications = {
+    @Authentication(type = AuthenticationType.BASIC, user = "test", password = "pass")
+  }, type = MediaType.TEXT_PLAIN, content = "test", headers = {
+    @Header(name = "test", value = "new-value")
+  })
+  public void overrideHeaderTestMethod() {
+    assertEquals( "test", resource.request.getBody() );
+    Map<String, List<String>> headers = resource.request.getHeaders();
+    assertTrue( headers.containsKey( "Authorization" ) );
+    assertEquals( "value,new-value", headers.get( "test" ).get( 0 ) );
+    assertEquals( MediaType.TEXT_PLAIN, resource.request.getType() );
+  }
 }

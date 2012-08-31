@@ -1,9 +1,12 @@
 /*******************************************************************************
- * Copyright (c) 2011 EclipseSource and others. All rights reserved. This program and the
- * accompanying materials are made available under the terms of the Eclipse Public License v1.0
+ * Copyright (c) 2011 EclipseSource and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html Contributors: Holger Staudacher - initial API and
- * implementation
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    Holger Staudacher - initial API and implementation
  ******************************************************************************/
 package com.eclipsesource.restfuse.internal;
 
@@ -64,14 +67,18 @@ public class RequestConfiguration {
   }
 
   private void addHeader( HttpTest call, InternalRequest request, RequestContext context ) {
-    
-    // add headers from context if available
-    if(context != null && context.headers.size() > 0 ) {
+    addHeadersFromContext( request, context );
+    addHeadersFromAnnotation( call, request );
+  }
+
+  private void addHeadersFromContext( InternalRequest request, RequestContext context ) {
+    if(context != null && !context.headers.isEmpty() ) {
       for( String name : context.headers.keySet() )
         request.addHeader( name, context.headers.get( name ) );
     }
-    
-    // add headers from annotations
+  }
+  
+  private void addHeadersFromAnnotation( HttpTest call, InternalRequest request ) {
     Header[] header = call.headers();
     if( header != null ) {
       for( Header parameter : header ) {

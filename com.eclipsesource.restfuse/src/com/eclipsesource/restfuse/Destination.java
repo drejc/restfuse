@@ -59,7 +59,6 @@ public class Destination implements MethodRule {
   private final String baseUrl;
   private String proxyHost;
   private int proxyPort;
-  
   private RequestContext context;
 
   /**
@@ -74,8 +73,7 @@ public class Destination implements MethodRule {
   public Destination( String baseUrl) {
     checkBaseUrl( baseUrl );
     this.baseUrl = baseUrl;
-    
-    context = new RequestContext();
+    this.context = new RequestContext();
   }
   
   /**
@@ -96,16 +94,14 @@ public class Destination implements MethodRule {
     this( baseUrl );
     this.proxyHost = proxyHost;
     this.proxyPort = proxyPort;
-    
-    context = new RequestContext();
+    this.context = new RequestContext();
   }
 
   /**
    * Access to context to define additional request properties at runtime
    * @return context to be manipulated
    */
-  public RequestContext getRequestContext()
-  {
+  public RequestContext getRequestContext() {
     return context;
   }
   

@@ -55,6 +55,7 @@ public class Destination_Test {
     assertEquals( base, statement );
   }
   
+  @SuppressWarnings("deprecation")
   @Rule
   public TestWatchman watchman = new TestWatchman() {
 
