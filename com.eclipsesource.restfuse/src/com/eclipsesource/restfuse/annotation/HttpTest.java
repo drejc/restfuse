@@ -127,6 +127,8 @@ public @interface HttpTest {
    * <p>Order of test in case tests need to be executed in certain order. 1 = first, 2 = second, ... 
    * By default order is set to 0
    * </p>
+   * 
+   * @since 1.2
    */
   int order() default 0;
   

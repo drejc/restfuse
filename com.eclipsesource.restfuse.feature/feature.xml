@@ -2,7 +2,7 @@
 <feature
       id="com.eclipsesource.restfuse.feature"
       label="restfuse"
-      version="1.1.0.qualifier"
+      version="1.2.0.qualifier"
       provider-name="EclipseSource">
 
    <description url="https://github.com/eclipsesource/restfuse">
@@ -16,6 +16,10 @@
    <license url="%licenseURL">
       %license
    </license>
+
+   <includes
+         id="com.eclipsesource.restfuse.additional.feature"
+         version="0.0.0"/>
 
    <plugin
          id="com.eclipsesource.restfuse"

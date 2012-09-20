@@ -10,7 +10,6 @@ import org.eclipse.jetty.servlet.ServletHolder;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Rule;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.eclipsesource.restfuse.DefaultCallbackResource;
@@ -26,24 +25,25 @@ import com.eclipsesource.restfuse.internal.callback.CallbackStatement;
 
 @RunWith(HttpJUnitRunner.class)
 public class HttpTestStatementOrder_Test {
+
+  private static int orderCheck = 0;
   
   private static final int TIMEOUT = 10;
-
   private static Server server;
-
   @Rule
   public Destination destination = new Destination( "http://localhost:10042/test" );
-  
   @Context
   private Response response;
 
-  
   @BeforeClass
   public static void setUp() throws Exception {
     server = new Server( 10042 );
-    ServletContextHandler context = new ServletContextHandler( server, "/", ServletContextHandler.SESSIONS );
+    ServletContextHandler context = new ServletContextHandler( server,
+                                                               "/",
+                                                               ServletContextHandler.SESSIONS );
     CallbackStatement statement = mock( CallbackStatement.class );
-    CallbackSerlvet servlet = new CallbackSerlvet( new DefaultCallbackResource(), statement );
+    CallbackSerlvet servlet = new CallbackSerlvet( new DefaultCallbackResource(),
+                                                   statement );
     context.addServlet( new ServletHolder( servlet ), "/" );
     server.start();
     int timer = 0;
@@ -52,7 +52,7 @@ public class HttpTestStatementOrder_Test {
       timer++;
     }
   }
-  
+
   @AfterClass
   public static void tearDown() throws Exception {
     server.stop();
@@ -63,49 +63,45 @@ public class HttpTestStatementOrder_Test {
     }
   }
   
-  private static int orderCheck = 0; 
-  
-  @Test
-  @HttpTest( method = Method.GET, path = "/" ) 
+  @HttpTest(method = Method.GET, path = "/")
   public void testNoOrder() {
     assertNotNull( response );
-    assertEquals( Status.NO_CONTENT.getStatusCode(), response.getStatus() );  
+    assertEquals( Status.NO_CONTENT.getStatusCode(), response.getStatus() );
   }
-  
-  @Test
-  @HttpTest( method = Method.GET, path = "/", order = 2 ) 
+
+  @HttpTest(method = Method.GET, path = "/", order = 2)
   public void testOrderSecond() {
     assertNotNull( response );
     assertEquals( Status.NO_CONTENT.getStatusCode(), response.getStatus() );
     
-    orderCheck ++;
-    assertEquals(2, orderCheck);
+    orderCheck++;
+    
+    assertEquals( 2, orderCheck );
   }
-  
-  @Test
-  @HttpTest( method = Method.GET, path = "/", order = 3) 
+
+  @HttpTest(method = Method.GET, path = "/", order = 3)
   public void testOrderThird() {
-	  assertNotNull( response );
-	  assertEquals( Status.NO_CONTENT.getStatusCode(), response.getStatus() );
-	  
-	  orderCheck ++;
-	  assertEquals(3, orderCheck);
+    assertNotNull( response );
+    assertEquals( Status.NO_CONTENT.getStatusCode(), response.getStatus() );
+    
+    orderCheck++;
+    
+    assertEquals( 3, orderCheck );
   }
-  
-  @Test
-  @HttpTest( method = Method.GET, path = "/", order = 1 ) 
+
+  @HttpTest(method = Method.GET, path = "/", order = 1)
   public void testOrderFirst() {
-	  assertNotNull( response );
-	  assertEquals( Status.NO_CONTENT.getStatusCode(), response.getStatus() );
-	  
-	  orderCheck ++;
-	  assertEquals(1, orderCheck);
+    assertNotNull( response );
+    assertEquals( Status.NO_CONTENT.getStatusCode(), response.getStatus() );
+    
+    orderCheck++;
+    
+    assertEquals( 1, orderCheck );
   }
-  
-  @Test
-  @HttpTest( method = Method.GET, path = "/" ) 
+
+  @HttpTest(method = Method.GET, path = "/")
   public void testNoOrder_2() {
     assertNotNull( response );
-    assertEquals( Status.NO_CONTENT.getStatusCode(), response.getStatus() );   
+    assertEquals( Status.NO_CONTENT.getStatusCode(), response.getStatus() );
   }
 }

@@ -44,7 +44,6 @@ public class HttpJUnitRunner extends BlockJUnit4ClassRunner {
         result.add( method );
       }
     }
-    
     Collections.sort( result, new HttpOrderComparator() );
     return result;
   }

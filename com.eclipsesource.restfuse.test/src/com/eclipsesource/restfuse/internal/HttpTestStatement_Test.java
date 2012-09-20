@@ -102,14 +102,6 @@ public class HttpTestStatement_Test {
     assertNull( System.getProperty( HttpTestStatement.HTTP_PROXY_HOST ) );
     assertNull( System.getProperty( HttpTestStatement.HTTP_PROXY_PORT ) );
   }
-
-  
-//  @Test
-//  @HttpTest( method = Method.GET, path = "/", headers = { @Header(name="Cookie", value="test=value")} )
-//  public void testRequestContextHeaders() {
-//	  	  
-//	  assertEquals(1, response.getHeaders().size());
-//  }
   
   private HttpTest createAnnotation() {
     HttpTest annotation = new HttpTest() {
